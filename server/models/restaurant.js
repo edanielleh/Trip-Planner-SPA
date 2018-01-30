@@ -1,4 +1,4 @@
-const db = require('./db')
+const db = require('./db');
 var Sequelize = require('sequelize');
 
 const Restaurant = db.define('restaurant', {
@@ -6,10 +6,10 @@ const Restaurant = db.define('restaurant', {
     type: Sequelize.STRING
   },
   cuisine: {
-    type: Sequelize.ARRAY(SEQUELIZE.STRING)
+    type: Sequelize.ARRAY(Sequelize.STRING)
   },
   price: {
-    type: SEQUELIZE.ENUM('1', '2', '3'. '4', '5')
+    type: Sequelize.ENUM('1', '2', '3', '4', '5')
   }
 }, {
   getterMethods: {
