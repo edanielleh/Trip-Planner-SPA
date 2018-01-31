@@ -17,6 +17,6 @@ const Place = db.define('place', {
   location: {
     type: Sequelize.ARRAY(Sequelize.FLOAT)
   }
-})
+});
 
 module.exports = Place;
