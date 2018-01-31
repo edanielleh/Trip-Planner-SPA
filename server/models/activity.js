@@ -8,6 +8,6 @@ const Activity = db.define('activity', {
   age_range: {
     type: Sequelize.STRING
   }
-})
+});
 
 module.exports = Activity;
