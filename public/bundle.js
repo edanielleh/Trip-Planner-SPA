@@ -60,75 +60,11 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 0);
+/******/ 	return __webpack_require__(__webpack_require__.s = 1);
 /******/ })
 /************************************************************************/
 /******/ ([
 /* 0 */
-/***/ (function(module, exports, __webpack_require__) {
-
-const mapboxgl = __webpack_require__(1);
-const buildMarker = __webpack_require__(3);
-
-mapboxgl.accessToken = "YOUR API TOKEN HERE";
-
-const fullstackCoords = [-74.009, 40.705] // NY
-// const fullstackCoords = [-87.6320523, 41.8881084] // CHI
-
-const map = new mapboxgl.Map({
-  container: "map",
-  center: fullstackCoords, // FullStack coordinates
-  zoom: 12, // starting zoom
-  style: "mapbox://styles/mapbox/streets-v10" // mapbox has lots of different map styles available.
-});
-
-const marker = buildMarker("activities", fullstackCoords);
-marker.addTo(map);
-
-// create a build options function
-const buildOptions = (name) => {
-  const newOptions = document.createElement("OPTION");
-  newOptions.label = name;
-  newOptions.value = name;
-  newOptions.text = name;
-  return newOptions;
-}
-
-fetch("/api")
-.then(result => result.json())
-.then(data => {
-    // for 0, call our build selects function on each element in the attractions array, and put it in the appropriate place on our html doc
-  const activities = data[0]
-  const activitySelect = document.getElementById("activities-choices")
-  const hotelSelect = document.getElementById("hotels-choices")
-  const restaurantSelect = document.getElementById("restaurants-choices")
-  activities.forEach(function(activity) {
-    activitySelect.appendChild(buildOptions(activity.name))
-  });
-  const hotels = data[1]
-  hotels.forEach(function(hotel) {
-    hotelSelect.appendChild(buildOptions(hotel.name))
-  })
-  const restaurants = data[2]
-  restaurants.forEach(function(restaurant) {
-    restaurantSelect.appendChild(buildOptions(restaurant.name))
-  })
-})
-.catch(function(err) {
-  console.log("We have an error", err)
-  // we might later show the user an error page saying that there was a problem loading your data
-})
-
-
-// client:  unbundled js - source files for whats being run on the front end - files for the front end app
-
-// public: html, css, bundle (what were letting the browser have access to)
-
-// server: backend, will be run on node
-
-
-/***/ }),
-/* 1 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(global) {var require;var require;(function(f){if(true){module.exports=f()}else if(typeof define==="function"&&define.amd){define([],f)}else{var g;if(typeof window!=="undefined"){g=window}else if(typeof global!=="undefined"){g=global}else if(typeof self!=="undefined"){g=self}else{g=this}g.mapboxgl = f()}})(function(){var define,module,exports;return (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return require(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(_dereq_,module,exports){
@@ -595,6 +531,89 @@ module.exports={"$version":8,"$root":{"version":{"required":true,"type":"enum","
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2)))
 
 /***/ }),
+/* 1 */
+/***/ (function(module, exports, __webpack_require__) {
+
+const mapboxgl = __webpack_require__(0);
+const buildMarker = __webpack_require__(3);
+
+mapboxgl.accessToken = "YOUR API TOKEN HERE";
+
+const fullstackCoords = [-74.009, 40.705] // NY
+// const fullstackCoords = [-87.6320523, 41.8881084] // CHI
+
+const map = new mapboxgl.Map({
+  container: "map",
+  center: fullstackCoords, // FullStack coordinates
+  zoom: 12, // starting zoom
+  style: "mapbox://styles/mapbox/streets-v10" // mapbox has lots of different map styles available.
+});
+
+const marker = buildMarker("activities", fullstackCoords);
+marker.addTo(map);
+
+// create a build options function
+const buildOptions = (name) => {
+  const newOptions = document.createElement("OPTION");
+  newOptions.label = name;
+  newOptions.value = name;
+  newOptions.text = name;
+  return newOptions;
+}
+
+
+fetch("/api")
+.then(result => result.json())
+.then(data => {
+    // for 0, call our build selects function on each element in the attractions array, and put it in the appropriate place on our html doc
+  const activities = data[0]
+  const activitySelect = document.getElementById("activities-choices")
+  const hotelSelect = document.getElementById("hotels-choices")
+  const restaurantSelect = document.getElementById("restaurants-choices")
+  activities.forEach(function(activity) {
+    activitySelect.appendChild(buildOptions(activity.name))
+  });
+  const hotels = data[1]
+  hotels.forEach(function(hotel) {
+    hotelSelect.appendChild(buildOptions(hotel.name))
+  })
+  const restaurants = data[2]
+  restaurants.forEach(function(restaurant) {
+    restaurantSelect.appendChild(buildOptions(restaurant.name))
+  })
+})
+.catch(function(err) {
+  console.log("We have an error", err)
+  // we might later show the user an error page saying that there was a problem loading your data
+})
+
+console.log(activities)
+
+const hotelsButton = document.getElementById("hotels-add")
+
+hotelsButton.addEventListener("click", function() {
+  const select = document.getElementById('hotels-choices');
+  const selectedId = select.value;
+  const node = document.createElement("li");
+  const textnode = document.createTextNode(selectedId);
+  node.appendChild(textnode);
+  const myHotels = document.getElementById('hotels-list');
+  myHotels.appendChild(node);
+  // query the db to find the coords
+  // create a new marker
+})
+
+
+
+// notes
+// client:  unbundled js - source files for whats being run on the front end - files for the front end app
+
+// public: html, css, bundle (what were letting the browser have access to)
+
+// server: backend, will be run on node
+
+
+/***/ }),
 /* 2 */
 /***/ (function(module, exports) {
 
@@ -625,7 +644,7 @@ module.exports = g;
 /* 3 */
 /***/ (function(module, exports, __webpack_require__) {
 
-const { Marker } = __webpack_require__(1);
+const { Marker } = __webpack_require__(0);
 
 const iconURLs = {
   hotels: "http://i.imgur.com/D9574Cu.png",

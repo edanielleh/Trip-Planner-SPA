@@ -25,6 +25,7 @@ const buildOptions = (name) => {
   return newOptions;
 }
 
+
 fetch("/api")
 .then(result => result.json())
 .then(data => {
@@ -50,7 +51,25 @@ fetch("/api")
   // we might later show the user an error page saying that there was a problem loading your data
 })
 
+console.log(activities)
 
+const hotelsButton = document.getElementById("hotels-add")
+
+hotelsButton.addEventListener("click", function() {
+  const select = document.getElementById('hotels-choices');
+  const selectedId = select.value;
+  const node = document.createElement("li");
+  const textnode = document.createTextNode(selectedId);
+  node.appendChild(textnode);
+  const myHotels = document.getElementById('hotels-list');
+  myHotels.appendChild(node);
+  // query the db to find the coords
+  // create a new marker
+})
+
+
+
+// notes
 // client:  unbundled js - source files for whats being run on the front end - files for the front end app
 
 // public: html, css, bundle (what were letting the browser have access to)
