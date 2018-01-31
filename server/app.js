@@ -28,7 +28,7 @@ app.listen(port, function() {
   db
     .sync({force:true})
     .then(function() {
-      console.log("Synchronated the database");
+      console.log("Synchronized the database!");
     })
     .catch(function(err) {
       console.error("Trouble right here in River City", err, err.stack);
