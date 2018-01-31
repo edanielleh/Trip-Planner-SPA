@@ -9,4 +9,11 @@ const Activity = require('./activity')
 
 // define the associations here
 
-module.exports = {db, Place, Hotel, Restaurant, Activity}
+module.exports = {db, Place, Hotel, Restaurant, Activity};
+  
+Hotel.belongsTo(Place);
+Restaurant.belongsTo(Place);
+Activity.belongsTo(Place);
+
+
+

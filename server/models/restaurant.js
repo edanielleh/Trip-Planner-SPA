@@ -6,18 +6,19 @@ const Restaurant = db.define('restaurant', {
     type: Sequelize.STRING
   },
   cuisine: {
-    type: Sequelize.ARRAY(Sequelize.STRING)
+    type: Sequelize.STRING
+    // (Sequelize.STRING)
   },
-  // price: {
-  //   type: Sequelize.ENUM('1', '2', '3', '4', '5')
-  // }
- }, 
-{
-  getterMethods: {
-    cuisine: function() {
-      return this.getDataValue('cuisine').join('');
-    }
+   price: {
+    type: Sequelize.INTEGER
   }
+//  }, 
+// {
+//   getterMethods: {
+//     cuisine: function() {
+//       return this.getDataValue('cuisine').join(', ');
+//     }
+//   }
 });
 
 module.exports = Restaurant;
